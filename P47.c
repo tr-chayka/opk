@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 {
 	int result = 0;
 	
-	if( argv == 4 )
+	if( argc == 4 )
 	{
 		result = crypt(argv[1], argv[2], argv[3]);
 	}
