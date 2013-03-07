@@ -53,7 +53,7 @@ int main()
 		assert( (int*)_bsearch(&t, arr, size(arr), sizeof(int), compare) == arr );
 	}
 	
-	#undef size(a)
+	#undef size
 	
 	{
 		int test_count = rand() % 1000;
