@@ -19,10 +19,10 @@ int main()
 		case -1: printf("A < B\n"); break;
 	}
 	
-	printf("A + B =");
+	printf("A + B = ");
 	rat_println( rat_add(A, B), stdout );
 	
-	printf("A - B =");
+	printf("A - B = ");
 	rat_println( rat_sub(A, B), stdout );
 	
 	printf("A * B = ");
@@ -46,6 +46,9 @@ int main()
 	
 	printf("A as double is %0.10lg\n", rat_to_d(A));
 	printf("B as double is %0.10lg\n", rat_to_d(B));
+	
+	rat_destroy(A);
+	rat_destroy(B);
 	
 	return 0;
 }

@@ -2,15 +2,27 @@
 #include <math.h>
 
 #define alloc(x) ((x*)malloc(sizeof(x)))
-#define simplify(x) {int g = gcb(abs(x->numer), abs(x->denom));x->numer /= g;x->denom /= g;}
-#define swap(a,b) {int p = a; a = b; b = p;}
 
-int gcb( int a, int b)
+void swap( int *a, int *b )
+{
+	int p = *a;
+	*a = *b;
+	*b = p;
+}
+
+int gcd( int a, int b)
 {
 	if ( b == 0 )
 		return a;
 	else
-		return gcb(b, a % b);
+		return gcd(b, a % b);
+}
+
+void simplify(struct Rational *x) 
+{
+	int g = gcd(abs(x->numer), abs(x->denom));
+	x->numer /= g;
+	x->denom /= g;
 }
 
 struct Rational *rat_create(int a, int b)
@@ -91,7 +103,7 @@ struct Rational *rat_power(struct Rational *r, int power)
 	res->denom = int_pow(r->denom, abs(power) );
 	
 	if( power < 0 )
-		swap(res->numer, res->denom);
+		swap(&(res->numer), &(res->denom));
 		
 	simplify(res);	
 	return res;
@@ -117,11 +129,16 @@ double rat_to_d(struct Rational *a)
 
 int rat_to_i(struct Rational *a)
 {
-	double t = (double)a->numer / a->denom;
+	double t = rat_to_d(a);
 	int _t = (int)t;
 	
 	if( fabs(t - _t) > fabs(_t + 1 - t) )
 		return _t + 1;
 	else
 		return _t;
+}
+
+void rat_destroy(struct Rational *r)
+{
+	free(r);
 }

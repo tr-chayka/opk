@@ -20,3 +20,4 @@ double rat_to_d(struct Rational *a);
 
 void rat_print(struct Rational *a, FILE *fp);
 void rat_println(struct Rational *a, FILE *fp);
+void rat_destroy(struct Rational *r);
