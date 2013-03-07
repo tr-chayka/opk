@@ -41,7 +41,7 @@ int main()
 	printf("B ^ %d = ", p);
 	rat_println( rat_power(B, p), stdout );
 	
-	printf("Roundec B is %d\n", rat_to_i(A));
+	printf("Rounded B is %d\n", rat_to_i(A));
 	printf("Rounded B is %d\n", rat_to_i(B));
 	
 	printf("A as double is %0.10lg\n", rat_to_d(A));
