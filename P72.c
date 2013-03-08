@@ -50,6 +50,8 @@ void _sort( const void *arr, int l, int r, int size, int (*compare)(const void *
 	}
 	while( i <= j );
 	
+	free(mid);
+	
 	if( i < r )
 		_sort(arr, i, r, size, compare);
 	if( j > l )
