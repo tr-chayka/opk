@@ -3,6 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include <assert.h>
+#include <limits.h>
 
 #define to_intp(a) ((int*)a)
 int compare_int( const void *a, const void * b )
@@ -63,17 +64,33 @@ void _qsort( const void *base, size_t count, size_t size, int (*compare)(const v
 
 void test_rand()
 {
-	int n = rand() % 1000;
-	int a[n], b[n];
+	{
+		int n = rand() % 100000;
+		int a[n], b[n];
 	
-	for( int i = 0; i < n; i++ )
-		a[i] = b[i] = rand();
+		for( int i = 0; i < n; i++ )
+			a[i] = b[i] = rand();
 	
-	qsort(a, n, sizeof(int), compare_int);
-	_qsort(b, n, sizeof(int), compare_int);
+		qsort(a, n, sizeof(int), compare_int);
+		_qsort(b, n, sizeof(int), compare_int);
 	
-	for( int i = 0; i < n; i++ )
-		assert( a[i] == b[i] );
+		for( int i = 0; i < n; i++ )
+			assert( a[i] == b[i] );
+	}
+	
+	{
+		int n = rand() % 100000;
+		char a[n], b[n];
+		
+		for( int i = 0; i < n; i++ )
+			a[i] = b[i] = rand() % CHAR_MAX;
+			
+		qsort(a, n, sizeof(char), compare_char);
+		_qsort(b, n, sizeof(char), compare_char);
+		
+		for( int i = 0; i < n; i++ )
+			assert( a[i] == b[i] );
+	}	
 }
 
 int main()
